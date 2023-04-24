@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - core_framework
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:

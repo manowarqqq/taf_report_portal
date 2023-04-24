@@ -2,6 +2,7 @@
   "name": "taf_report_portal",
   "version": "1.0.0",
   "description": "Test Automation Framework For ReportPortal",
+  "type": "module",
   "scripts": {
     "clean": "rimraf ./build",
     "build": "npm run clean && tsc",

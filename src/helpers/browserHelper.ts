@@ -9,6 +9,13 @@ export default class BrowserHelper {
         })
     }
 }
+export const browser = await BrowserHelper.getBrowser();
+// export const browser = Promise.resolve(() => {
+//     BrowserHelper.getBrowser().then(r => r);
+// });
 
-// export const browser = await BrowserHelper.getBrowser();
+
+// export const browser = await (async (): Promise<WebdriverIO.Browser> => {
+//     return await BrowserHelper.getBrowser()
+// })();
 
