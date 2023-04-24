@@ -2,14 +2,25 @@ import {remote} from "webdriverio";
 
 export default class BrowserHelper {
 
-    static async getBrowser(): Promise<WebdriverIO.Browser> {
+    static browser: WebdriverIO.Browser;
 
-        return await remote({
-            capabilities: { browserName: 'chrome' }
-        })
+
+    public static async getBrowser(): Promise<WebdriverIO.Browser> {
+        if (!BrowserHelper.browser) {
+                BrowserHelper.browser = await remote({
+                capabilities: {browserName: 'chrome'}
+                     });
+        }
+
+        return BrowserHelper.browser;
     }
+    //
+    // static async getBrowser(): Promise<WebdriverIO.Browser> {
+    //        return  await remote({
+    //             capabilities: {browserName: 'chrome'}
+    //         })
+    // }
 }
-export const browser = await BrowserHelper.getBrowser();
 // export const browser = Promise.resolve(() => {
 //     BrowserHelper.getBrowser().then(r => r);
 // });
