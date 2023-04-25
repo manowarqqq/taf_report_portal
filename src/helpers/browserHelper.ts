@@ -1,4 +1,6 @@
 import {remote} from "webdriverio";
+import {TestConfig} from "../data/TestConfig";
+import SeleniumStandalone from "selenium-standalone";
 
 export default class BrowserHelper {
 
@@ -7,19 +9,25 @@ export default class BrowserHelper {
 
     public static async getBrowser(): Promise<WebdriverIO.Browser> {
         if (!BrowserHelper.browser) {
-                BrowserHelper.browser = await remote({
-                capabilities: {browserName: 'chrome'}
-                     });
-        }
+            await SeleniumStandalone.install();
+            await SeleniumStandalone.start();
+
+            BrowserHelper.browser = await remote({
+                    automationProtocol: "webdriver",
+                    capabilities: {browserName: TestConfig.getBrowserType()},
+                    services: [ 'selenium-standalone' ],
+                         });
+          }
 
         return BrowserHelper.browser;
     }
-    //
-    // static async getBrowser(): Promise<WebdriverIO.Browser> {
-    //        return  await remote({
-    //             capabilities: {browserName: 'chrome'}
-    //         })
-    // }
+
+
+    public static async close() {
+        await (await BrowserHelper.getBrowser()).deleteSession();
+    }
+
+
 }
 // export const browser = Promise.resolve(() => {
 //     BrowserHelper.getBrowser().then(r => r);

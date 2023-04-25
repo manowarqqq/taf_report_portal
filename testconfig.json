@@ -1,4 +1,6 @@
 {
-    "username": "111",
-     "password":"11111"
+  "baseUrl":"http://localhost:8080",
+  "username": "default",
+  "password":"1q2w3e",
+  "browser": "chrome"
 }
