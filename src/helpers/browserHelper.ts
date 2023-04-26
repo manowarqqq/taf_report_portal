@@ -1,5 +1,5 @@
 import {remote} from "webdriverio";
-import {TestConfig} from "../data/TestConfig";
+import {TestConfig} from "../data/testConfig";
 
 export default class BrowserHelper {
 

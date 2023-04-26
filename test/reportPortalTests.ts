@@ -6,7 +6,7 @@ import {expect} from 'chai';
 import WindowHelper from "../src/helpers/windowHelper";
 import {TitlesEnum} from "../src/enums/titlesEnum";
 import FiltersPage from "../src/pageobjects/filtersPage";
-import {TestConfig} from "../src/data/TestConfig";
+import {TestConfig} from "../src/data/testConfig";
 import BrowserHelper from "../src/helpers/browserHelper";
 
 describe("Smoke tests suit", () => {
