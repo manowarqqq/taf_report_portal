@@ -30,8 +30,5 @@ describe("Smoke tests suit", () => {
             expect(await FiltersPage.getTitle()).to.equal(TitlesEnum.FiltersPage, 'Filters is not loaded');
         });
     })
-
-
-
 });
 
