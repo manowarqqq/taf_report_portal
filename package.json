@@ -6,7 +6,8 @@
     "eslint": "eslint  . --ext .ts",
     "clean": "rimraf ./build ./mochawesome-report",
     "build": "npm run clean && tsc && copyfiles testconfig.json ./build",
-    "test": "mocha ./build/test/test.js --reporter mochawesome --timeout 100000"
+    "test": "node  ./build/src/runner/runner.js"
+
   },
   "dependencies": {
     "chai": "*",

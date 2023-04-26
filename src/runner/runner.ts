@@ -1,22 +1,9 @@
-// import exp from "constants";
-//
-// export class TestRunner {
-//      mocha: Mocha;
-//
-//     private static instance: TestRunner;
-//
-//     constructor(mochaOptions: Mocha.MochaOptions) {
-//         this.mocha = new Mocha(mochaOptions);
-//     }
-//
-//     public static getInstance(): TestRunner {
-//         if (!TestRunner.instance) {
-// //  Add mocha options
-// //             const mochaOptions = ...
-//
-//             // TestRunner.instance = new TestRunner(mochaOptions);
-//         }
-//
-//         return TestRunner.instance;
-//     }
-// }
+import mochaConfig from '../config/mochaConfig.json'
+import Mocha from 'mocha';
+import path from 'path';
+
+
+const runner = new Mocha(mochaConfig);
+
+runner.addFile(path.join(__dirname,'../../test/reportPortalTests.js'));
+runner.run();
