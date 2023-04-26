@@ -1,6 +1,5 @@
 import BasePage from "../src/pageobjects/basePage";
 import LoginPage from "../src/pageobjects/loginPage";
-import Waiters from "../src/helpers/waiters";
 import {HomePage} from "../src/pageobjects/homePage";
 import {expect} from 'chai';
 import WindowHelper from "../src/helpers/windowHelper";
@@ -26,7 +25,6 @@ describe("Smoke tests suit", () => {
         });
 
         it("should open Filters page", async () => {
-            await Waiters.delay(3000);
             await HomePage.openFilters();
 
             expect(await FiltersPage.getTitle()).to.equal(TitlesEnum.FiltersPage, 'Filters is not loaded');
