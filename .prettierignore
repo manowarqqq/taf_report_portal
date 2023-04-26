@@ -1,0 +1,8 @@
+node_modules
+testFiles
+build
+!patches
+package-lock.json
+
+**/*.map
+**/*.js
