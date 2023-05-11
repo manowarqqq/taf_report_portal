@@ -6,10 +6,13 @@
     "eslint": "eslint  . --ext .ts",
     "clean": "rimraf ./build ./mochawesome-report",
     "build": "npm run clean && tsc && copyfiles testconfig.json ./build",
-    "test": "node  ./build/src/runner/runner.js"
+    "test": "node  ./build/src/runner/runner.js",
+    "cucumber": "wdio run ./src/configs/cucumber.conf.js"
   },
   "dependencies": {
     "chai": "*",
+    "cucumber": "^6.0.7",
+    "cucumber-pretty": "^6.0.1",
     "jasmine": "^4.6.0",
     "log4js": "^6.9.1",
     "mocha": "^10.2.0",
@@ -19,6 +22,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.4",
     "@types/chromedriver": "^81.0.1",
+    "@types/cucumber": "^7.0.0",
     "@types/mochawesome": "^6.2.1",
     "@types/node": "^18.15.11",
     "@types/selenium-standalone": "^7.0.1",

@@ -19,3 +19,5 @@ export default class FiltersPage extends BasePage {
         return await ElementHelper.getText(this.title);
     }
 }
+
+export const filterPage = new FiltersPage();
