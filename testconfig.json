@@ -2,5 +2,7 @@
   "baseUrl":"http://localhost:8080",
   "username": "default",
   "password":"1q2w3e",
-  "browser": "chrome"
+  "browser": "chrome",
+  "driver": "webdriverio",
+  "runner": "jasmine"
 }

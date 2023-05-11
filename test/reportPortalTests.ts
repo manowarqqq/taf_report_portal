@@ -1,34 +1,34 @@
-import BasePage from "../src/pageobjects/basePage";
-import LoginPage from "../src/pageobjects/loginPage";
-import {HomePage} from "../src/pageobjects/homePage";
+import {loginPage} from '../src/pageobjects/loginPage';
+import {homePage} from '../src/pageobjects/homePage';
 import {expect} from 'chai';
-import WindowHelper from "../src/helpers/windowHelper";
-import {TitlesEnum} from "../src/enums/titlesEnum";
-import FiltersPage from "../src/pageobjects/filtersPage";
-import {TestConfig} from "../src/data/testConfig";
-import BrowserHelper from "../src/helpers/browserHelper";
+import WindowHelper from '../src/helpers/windowHelper';
+import {TitlesEnum} from '../src/enums/titlesEnum';
+import {TestConfig} from '../src/data/testConfig';
+import {BrowserHelper} from '../src/helpers/browserHelper';
 
-describe("Smoke tests suit", () => {
+describe('Smoke tests suit', () => {
+    before(async () => {
+        await BrowserHelper.init();
+    });
+    after(async () => {
+        await BrowserHelper.close();
+    });
+    beforeEach(async () => {
+        await homePage.open();
+    });
+    afterEach(async () => {});
 
-    describe("Login as default user", async  () => {
+    it('should be possible to login as default user', async () => {
+        await (await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword())).waitForLoaded();
 
-        after(async () => {
-            await BrowserHelper.close();
-        })
+        expect(await WindowHelper.getCurrentWindowTitle()).to.equal(TitlesEnum.ReportPortal, 'Home page is not loaded');
+    });
 
-        it("should be possible to login as default user", async () => {
-            await BasePage.open(TestConfig.getBaseUrl());
-            await LoginPage.login(TestConfig.getUsername(),TestConfig.getPassword());
-            await HomePage.waitForLoaded();
+    it('should open Filters page', async () => {
+        await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
+        await homePage.waitForLoaded();
+        let filterPage = await homePage.openFilters();
 
-            expect(await WindowHelper.getCurrentWindowTitle()).to.equal(TitlesEnum.ReportPortal, 'Home page is not loaded');
-        });
-
-        it("should open Filters page", async () => {
-            await HomePage.openFilters();
-
-            expect(await FiltersPage.getTitle()).to.equal(TitlesEnum.FiltersPage, 'Filters is not loaded');
-        });
-    })
+        expect(await filterPage.getTitle()).to.equal(TitlesEnum.FiltersPage, 'Filters is not loaded');
+    });
 });
-

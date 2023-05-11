@@ -1,25 +1,21 @@
-import BasePage from "./basePage";
-import BrowserHelper from "../helpers/browserHelper";
-import ElementHelper from "../helpers/elementHelpers";
-import {TitlesEnum} from "../enums/titlesEnum";
-import {Timeouts} from "../helpers/timeouts";
+import BasePage from './basePage';
+import ElementHelper from '../helpers/elementHelpers';
+import {TitlesEnum} from '../enums/titlesEnum';
+import Waiters from '../helpers/waiters';
 
 export default class FiltersPage extends BasePage {
+    private title: string;
 
-    private static title = '#app div[class^="pageLayout__page-header"] span[title]';
-
-
-    static async waitForLoaded(){
-        (await BrowserHelper.getBrowser()).waitUntil(
-            async () => {
-
-                return (await ElementHelper.getText(FiltersPage.title)) === TitlesEnum.FiltersPage;
-            },
-            {timeout: Timeouts.long, timeoutMsg: `"${TitlesEnum.FiltersPage}" windows is not loaded`},
-        )
+    constructor() {
+        super();
+        this.title = '#app div[class^="pageLayout__page-header"] span[title]';
     }
 
-    static async getTitle(): Promise<string> {
-         return  await ElementHelper.getText(this.title)
+    public async waitForLoaded() {
+        await Waiters.waitForWindowLoadedByTitle(this.title, TitlesEnum.FiltersPage);
+    }
+
+    public async getTitle(): Promise<string> {
+        return await ElementHelper.getText(this.title);
     }
 }

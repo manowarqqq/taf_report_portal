@@ -1,16 +1,16 @@
-import {logger} from "../utils/logger/logger";
-import ElementHelper from "../helpers/elementHelpers";
-import WindowHelper from "../helpers/windowHelper";
+import {logger} from '../utils/logger/logger';
+import ElementHelper from '../helpers/elementHelpers';
+import WindowHelper from '../helpers/windowHelper';
+import {TestConfig} from '../data/testConfig';
 export default class BasePage {
+    async open(): Promise<void> {
+        await logger.info(`Opening the url "${TestConfig.getBaseUrl()}"`);
+        await WindowHelper.navigateTo(TestConfig.getBaseUrl());
+    }
 
-    static async open(url: string): Promise<void> {
-        await logger.info(`Opening the url "${url}"`);
-        await WindowHelper.navigateTo(url);
-        }
-
-   static async reload(): Promise<void> {
+    async reload(): Promise<void> {
         const currentUrl = ElementHelper.getUrl();
         await logger.info(`Reloading page with url "${currentUrl}"`);
         await WindowHelper.refresh();
-        }
+    }
 }

@@ -1,16 +1,19 @@
-import BrowserHelper from "./browserHelper";
+import {BrowserHelper} from './browserHelper';
 
 export default class WindowHelper {
-
     static async navigateTo(url: string): Promise<string> {
-        return await (await BrowserHelper.getBrowser()).url(url);
+        return BrowserHelper.browser.url(url);
     }
 
     static async getCurrentWindowTitle() {
-        return await (await BrowserHelper.getBrowser()).getTitle();
+        return await BrowserHelper.browser.getTitle();
     }
 
     public static async refresh() {
-        await (await BrowserHelper.getBrowser()).refresh();
+        await BrowserHelper.browser.refresh();
+    }
+
+    public static async closeWindow() {
+        await BrowserHelper.browser.closeWindow();
     }
 }

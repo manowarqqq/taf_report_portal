@@ -1,45 +1,39 @@
-import BrowserHelper from "./browserHelper";
-import {Timeouts} from "./timeouts";
-
-
+import {BrowserHelper} from './browserHelper';
+import {Timeouts} from './timeouts';
 
 export default class ElementHelper {
-
-    static async getElement(locator: string): Promise<WebdriverIO.Element>{
-        return(await BrowserHelper.getBrowser()).$(locator);
+    static async getElement(locator: string): Promise<WebdriverIO.Element> {
+        return BrowserHelper.browser.$(locator);
     }
 
-    public static async getText(locator: string, isInnerText = false): Promise<string> {
-        const element =await (await BrowserHelper.getBrowser()).$(locator);
-        if(isInnerText) {
-
-           return await element.getAttribute('innerText');
-            } else {
-                return await element.getText();
-            }
+    public static async getText(locator: string, isInnerText: boolean = false): Promise<string> {
+        const element = await BrowserHelper.browser.$(locator);
+        if (isInnerText) {
+            return await element.getAttribute('innerText');
+        } else {
+            return await element.getText();
         }
+    }
 
     static async click(locator: string) {
         await (await ElementHelper.getElement(locator)).click();
     }
 
     public static async setValue(locator: string, value: string) {
-        const element = (await BrowserHelper.getBrowser()).$(locator);
+        const element = BrowserHelper.browser.$(locator);
         await element.waitForDisplayed({timeout: Timeouts.medium});
-        await (await (await BrowserHelper.getBrowser()).$(locator)).setValue(value);
+        await (await BrowserHelper.browser.$(locator)).setValue(value);
     }
 
     public static async getUrl(): Promise<string> {
-        return (await BrowserHelper.getBrowser()).getUrl();
+        return BrowserHelper.browser.getUrl();
     }
 
     public static async isClickable(locator: string): Promise<boolean> {
-        return await ((await BrowserHelper.getBrowser()).$(locator)).isClickable();
+        return await BrowserHelper.browser.$(locator).isClickable();
     }
 
     public static async getAttributeValue(locator: string, attribute: string): Promise<string> {
-        return await (await (await BrowserHelper.getBrowser()).$(locator)).getAttribute(attribute);
+        return await (await BrowserHelper.browser.$(locator)).getAttribute(attribute);
     }
-
 }
-

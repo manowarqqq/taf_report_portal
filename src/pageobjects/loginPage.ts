@@ -1,16 +1,28 @@
-import BasePage from "./basePage";
-import ElementHelper from "../helpers/elementHelpers";
+import BasePage from './basePage';
+import ElementHelper from '../helpers/elementHelpers';
+import {HomePage} from './homePage';
 
 export default class LoginPage extends BasePage {
-    private static usernameInput = 'input[name="login"]';
-    private static passwordInput = 'input[name="password"]';
-    private static submitBtn = 'button[type="submit"]';
+    private usernameInput: string;
 
+    private passwordInput: string;
 
-    static async login(username: string, password: string) {
-        await ElementHelper.setValue(LoginPage.usernameInput, username);
-        await ElementHelper.setValue(LoginPage.passwordInput, password);
-        await ElementHelper.click(LoginPage.submitBtn);
+    private submitBtn: string;
+
+    constructor() {
+        super();
+        this.usernameInput = 'input[name="login"]';
+        this.passwordInput = 'input[name="password"]';
+        this.submitBtn = 'button[type="submit"]';
+    }
+
+    public async login(username: string, password: string): Promise<HomePage> {
+        await ElementHelper.setValue(this.usernameInput, username);
+        await ElementHelper.setValue(this.passwordInput, password);
+        await ElementHelper.click(this.submitBtn);
+
+        return new HomePage();
     }
 }
 
+export const loginPage = new LoginPage();
