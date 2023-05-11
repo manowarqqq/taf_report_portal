@@ -1,0 +1,5 @@
+{
+  "stopSpecOnExpectationFailure": false,
+  "random": false,
+  "jsLoader": "import"
+}

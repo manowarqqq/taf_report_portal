@@ -1,15 +1,11 @@
-// let testconfigJson = ('../../testconfig.json');
-
-import testconfigJson from '../../testconfig.json'
-
+import testconfigJson from '../../testconfig.json';
 
 export class TestConfig {
     private static testConfig: typeof testconfigJson = testconfigJson;
 
-
     public static isChrome(): boolean {
         return TestConfig.testConfig.browser === 'Chrome';
-     }
+    }
 
     public static getBrowserType() {
         return TestConfig.testConfig.browser;
@@ -29,5 +25,9 @@ export class TestConfig {
 
     public static getConfig() {
         return TestConfig.testConfig;
+    }
+
+    public static getRunner() {
+        return TestConfig.testConfig.runner;
     }
 }
