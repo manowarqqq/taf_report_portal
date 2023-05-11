@@ -1,4 +1,3 @@
-import {Given, When, Then} from 'cucumber';
 import {loginPage} from '../../../src/pageobjects/loginPage';
 import {homePage} from '../../../src/pageobjects/homePage';
 import {expect} from 'chai';
@@ -7,6 +6,7 @@ import {TitlesEnum} from '../../../src/enums/titlesEnum';
 import {TestConfig} from '../../../src/data/testConfig';
 import {BrowserHelper} from '../../../src/helpers/browserHelper';
 import {filterPage} from '../../../src/pageobjects/filtersPage';
+import {Given, When, Then} from '@cucumber/cucumber';
 
 Given('I open login page', async function () {
     await homePage.open();

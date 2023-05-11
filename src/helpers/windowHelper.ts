@@ -1,4 +1,5 @@
 import {BrowserHelper} from './browserHelper';
+import {Key} from 'webdriverio';
 
 export default class WindowHelper {
     static async navigateTo(url: string): Promise<string> {
@@ -15,5 +16,9 @@ export default class WindowHelper {
 
     public static async closeWindow() {
         await BrowserHelper.browser.closeWindow();
+    }
+
+    public static async sendKeys(keys: string | string[]) {
+        await BrowserHelper.browser.keys(keys);
     }
 }

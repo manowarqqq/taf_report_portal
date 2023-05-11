@@ -23,6 +23,7 @@
     "@types/chai": "^4.3.4",
     "@types/chromedriver": "^81.0.1",
     "@types/cucumber": "^7.0.0",
+    "@types/jasmine": "^4.3.1",
     "@types/mochawesome": "^6.2.1",
     "@types/node": "^18.15.11",
     "@types/selenium-standalone": "^7.0.1",

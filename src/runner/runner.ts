@@ -1,18 +1,18 @@
 import mochaConfig from '../config/mochaConfig.json';
-import jasmineConfig from '../config/jasmineConfig.json';
 import Mocha from 'mocha';
 import Jasmine from 'jasmine';
 import path from 'path';
 import {TestConfig} from '../data/testConfig';
+import {logger} from '../utils/logger/logger';
 
 (async () => {
-    if (TestConfig.getRunner() === 'Mocha') {
+    if (TestConfig.getRunner() === 'mocha') {
         const runner = new Mocha(mochaConfig);
         runner.addFile(path.join(__dirname, '../../test/reportPortalTests.js'));
         runner.run();
-    } else {
+    } else if (TestConfig.getRunner() === 'jasmine') {
         const testRunner = new Jasmine({projectBaseDir: __dirname});
-        testRunner.loadConfigFile(jasmineConfig);
+        testRunner.loadConfigFile('../config/jasmineConfig.json');
         await testRunner.execute();
-    }
+    } else logger.info('Wrong test runner');
 })();

@@ -1,5 +1,5 @@
 {
-  "baseUrl":"http://localhost:8080",
+  "baseUrl":"https://demo.reportportal.io",
   "username": "default",
   "password":"1q2w3e",
   "browser": "chrome",
