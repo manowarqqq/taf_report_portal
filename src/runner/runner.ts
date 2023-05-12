@@ -1,9 +1,10 @@
 import mochaConfig from '../config/mochaConfig.json';
 import Mocha from 'mocha';
-import Jasmine from 'jasmine';
+// import Jasmine from 'jasmine';
 import path from 'path';
 import {TestConfig} from '../data/testConfig';
 import {logger} from '../utils/logger/logger';
+import * as Jasmine from 'jasmine';
 
 (async () => {
     if (TestConfig.getRunner() === 'mocha') {

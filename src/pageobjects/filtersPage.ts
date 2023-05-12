@@ -10,10 +10,16 @@ export default class FiltersPage extends BasePage {
 
     private inputLaunchName: string;
 
+    private addFilterButton: string;
+
+    private widgetNames: string;
+
     constructor() {
         super();
         this.title = '#app div[class^="pageLayout__page-header"] span[title]';
         this.inputLaunchName = 'input[placeholder="Enter name"]';
+        this.addFilterButton = '//span[text()="Add filter"]';
+        this.widgetNames = '.itemInfo__name--27fwI>span';
     }
 
     public async waitForLoaded() {
@@ -25,8 +31,13 @@ export default class FiltersPage extends BasePage {
     }
 
     public async filterLaunchName(launchName: string) {
+        await ElementHelper.click(this.addFilterButton);
         await ElementHelper.setValue(this.inputLaunchName, launchName);
         await WindowHelper.sendKeys(Key.Enter);
+    }
+
+    public async getAllWidget(): Promise<string[]> {
+        return ElementHelper.getTextElementsArray(this.widgetNames);
     }
 }
 

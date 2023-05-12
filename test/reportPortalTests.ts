@@ -16,7 +16,6 @@ describe('Smoke tests suit', () => {
     beforeEach(async () => {
         await homePage.open();
     });
-    afterEach(async () => {});
 
     it('should be possible to login as default user', async () => {
         await (await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword())).waitForLoaded();
@@ -30,5 +29,17 @@ describe('Smoke tests suit', () => {
         let filterPage = await homePage.openFilters();
 
         expect(await filterPage.getTitle()).to.equal(TitlesEnum.FiltersPage, 'Filters is not loaded');
+    });
+
+    it('Should filters widget', async () => {
+        let demoApiTestWidget = 10;
+        let widgetName = 'Demo Api Tests';
+        await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
+        await homePage.waitForLoaded();
+        let filterPage = await homePage.openFilters();
+        await filterPage.filterLaunchName(widgetName);
+        let widgetNames = await filterPage.getAllWidget();
+
+        expect(widgetNames.length).to.equal(demoApiTestWidget, 'Numbers of widget is incorrect after filtering');
     });
 });

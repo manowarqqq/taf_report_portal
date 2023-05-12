@@ -6,6 +6,10 @@ export default class ElementHelper {
         return BrowserHelper.browser.$(locator);
     }
 
+    static async getElements(locator: string): Promise<WebdriverIO.Element[]> {
+        return BrowserHelper.browser.$$(locator);
+    }
+
     public static async getText(locator: string, isInnerText: boolean = false): Promise<string> {
         const element = await BrowserHelper.browser.$(locator);
         if (isInnerText) {
@@ -13,6 +17,20 @@ export default class ElementHelper {
         } else {
             return await element.getText();
         }
+    }
+
+    public static async getTextElementsArray(locator: string, isInnerText: boolean = false): Promise<string[]> {
+        const elements = await BrowserHelper.browser.$$(locator);
+        const textArr: string[] = [];
+
+        for (let i = 0; i < elements.length; i++) {
+            if (isInnerText) {
+                textArr.push(await elements[i].getAttribute('innerText'));
+            } else {
+                textArr.push(await elements[i].getText());
+            }
+        }
+        return textArr;
     }
 
     static async click(locator: string) {
