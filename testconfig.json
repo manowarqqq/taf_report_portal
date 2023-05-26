@@ -4,5 +4,6 @@
   "password":"1q2w3e",
   "browser": "chrome",
   "driver": "webdriverio",
-  "runner": "jasmine"
+  "runner": "mocha",
+  "project": "default_personal"
 }

@@ -6,11 +6,12 @@
     "eslint": "eslint  . --ext .ts",
     "clean": "rimraf ./build ./mochawesome-report",
     "build": "npm run clean && tsc && copyfiles testconfig.json ./build",
-    "test": "node  ./build/src/runner/runner.js",
+    "apiTtest": "node  ./build/src/runner/runner.js",
     "cucumber": "cucumber-js ./build/test/features"
   },
   "dependencies": {
     "chai": "*",
+    "chai-json-schema": "^1.5.1",
     "cucumber": "^6.0.7",
     "cucumber-pretty": "^6.0.1",
     "jasmine": "^4.6.0",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
+    "@types/chai-json-schema": "^1.4.6",
     "@types/chromedriver": "^81.0.1",
     "@types/cucumber": "^7.0.0",
     "@types/jasmine": "^4.3.1",

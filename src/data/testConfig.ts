@@ -30,4 +30,8 @@ export class TestConfig {
     public static getRunner() {
         return TestConfig.testConfig.runner;
     }
+
+    static getProject() {
+        return TestConfig.testConfig.project;
+    }
 }
