@@ -57,23 +57,18 @@ export class HttpMethods {
         }
     }
 
-    public static async deleteWithAuthRequest(endpoint: string, token: string, requestBody?: any) {
+    public static async deleteWithAuthRequest(endpoint: string, token: string) {
         const url = TestConfig.getBaseUrl() + endpoint;
-        let body = {
-            method: 'DELETE',
-            url: url,
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-            responseType: 'json',
-        };
-
-        if (requestBody) {
-            body = {...body, ...{data: requestBody}};
-        }
         try {
-            const response = await axios(body);
+            const response = await axios({
+                method: 'DELETE',
+                url: url,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                responseType: 'json',
+            });
 
             return {
                 status: response.status,
