@@ -1,22 +1,33 @@
 import axios from 'axios';
 import {TestConfig} from '../../data/testConfig';
+import {endpoints} from './endpoints';
+import {oauth} from './configurations';
 
 export class HttpMethods {
-    public static async getWithAuthRequest(endpoint: string, token: string) {
+    private static token: string;
+
+    public static async getToken() {
+        if (!this.token) {
+            this.token = (await this.postForToken(endpoints.oauth, oauth.requestBody(TestConfig.getUsername(), TestConfig.getPassword()))).data.access_token;
+        }
+        return this.token;
+    }
+
+    public static async getWithAuthRequest(endpoint: string, token?: string) {
         const url = TestConfig.getBaseUrl() + endpoint;
 
         try {
             return await axios({
                 method: 'get',
                 url: url,
-                headers: {Authorization: `Bearer ${token}`},
+                headers: {Authorization: `Bearer ${token === undefined ? await this.getToken() : token}`},
             });
         } catch (err: any) {
             return err;
         }
     }
 
-    public static async postWithAuthRequest(endpoint: string, token: string, requestBody: any) {
+    public static async postWithAuthRequest(endpoint: string, requestBody: any) {
         const url = TestConfig.getBaseUrl() + endpoint;
 
         try {
@@ -24,7 +35,7 @@ export class HttpMethods {
                 method: 'POST',
                 url: url,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${await this.getToken()}`,
                     'Content-Type': 'application/json',
                 },
                 data: requestBody,
@@ -57,14 +68,14 @@ export class HttpMethods {
         }
     }
 
-    public static async deleteWithAuthRequest(endpoint: string, token: string) {
+    public static async deleteWithAuthRequest(endpoint: string, token?: string) {
         const url = TestConfig.getBaseUrl() + endpoint;
         try {
             const response = await axios({
                 method: 'DELETE',
                 url: url,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${await this.getToken()}`,
                     'Content-Type': 'application/json',
                 },
                 responseType: 'json',

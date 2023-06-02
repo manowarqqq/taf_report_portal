@@ -1,12 +1,10 @@
-import {Oauth} from './api/oauth';
 import {HttpMethods} from './api/htppMethods';
 import {endpoints} from './api/endpoints';
 import {logger} from '../utils/logger/logger';
 
 export class LaunchesService {
     public static async getLaucnhes() {
-        const token = await Oauth.getToken();
-        const response = await HttpMethods.getWithAuthRequest(endpoints.launches.getLaunches, token.access_token);
+        const response = await HttpMethods.getWithAuthRequest(endpoints.launches.getLaunches);
 
         if (response && response.data && response.data) {
             logger.info('Got list of launches');
