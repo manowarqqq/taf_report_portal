@@ -3,7 +3,7 @@
   "username": "default",
   "password":"1q2w3e",
   "browser": "chrome",
-  "driver": "webdriverio",
+  "driver": "playwright",
   "runner": "mocha",
   "project": "default_personal"
 }

@@ -1,5 +1,5 @@
 export enum TitlesEnum {
     ReportPortal = 'Report Portal',
-    FiltersPage = 'FILTERS',
+    FiltersPage = 'Filters',
 }
 export type TitlesEnumType = `${TitlesEnum}`;

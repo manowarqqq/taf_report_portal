@@ -34,4 +34,8 @@ export class TestConfig {
     static getProject() {
         return TestConfig.testConfig.project;
     }
+
+    static getDriver() {
+        return TestConfig.testConfig.driver;
+    }
 }

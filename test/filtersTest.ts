@@ -6,7 +6,7 @@ import {TitlesEnum} from '../src/enums/titlesEnum';
 import {TestConfig} from '../src/data/testConfig';
 import {BrowserHelper} from '../src/helpers/browserHelper';
 
-describe('Smoke tests suit', () => {
+describe('Filters smoke tests suit', () => {
     before(async () => {
         await BrowserHelper.init();
     });
@@ -14,7 +14,11 @@ describe('Smoke tests suit', () => {
         await BrowserHelper.close();
     });
     beforeEach(async () => {
+        await BrowserHelper.openPage();
         await homePage.open();
+    });
+    afterEach(async () => {
+        await WindowHelper.closeWindow();
     });
 
     it('should be possible to login as default user', async () => {
@@ -32,7 +36,7 @@ describe('Smoke tests suit', () => {
     });
 
     it('Should filters widget', async () => {
-        let demoApiTestWidget = 10;
+        let demoApiTestWidget = 40;
         let widgetName = 'Demo Api Tests';
         await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
         await homePage.waitForLoaded();

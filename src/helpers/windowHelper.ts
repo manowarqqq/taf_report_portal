@@ -1,24 +1,30 @@
 import {BrowserHelper} from './browserHelper';
-import {Key} from 'webdriverio';
+import {BrowserContext} from 'playwright';
 
 export default class WindowHelper {
-    static async navigateTo(url: string): Promise<string> {
-        return BrowserHelper.browser.url(url);
+    static async navigateTo(url: string) {
+        return await BrowserHelper.page.goto(url);
     }
 
     static async getCurrentWindowTitle() {
-        return await BrowserHelper.browser.getTitle();
+        return BrowserHelper.page.title();
     }
 
     public static async refresh() {
-        await BrowserHelper.browser.refresh();
+        return BrowserHelper.page.reload();
     }
 
     public static async closeWindow() {
-        await BrowserHelper.browser.closeWindow();
+        let context: BrowserContext = await BrowserHelper.page.context();
+        await context.close();
+        // await BrowserHelper.page.close();
     }
 
-    public static async sendKeys(keys: string | string[]) {
-        await BrowserHelper.browser.keys(keys);
+    public static async sendKeys(keys: string) {
+        return BrowserHelper.page.keyboard.press(keys);
+    }
+
+    public static async takeScreenshot(path: string) {
+        await BrowserHelper.page.screenshot({path: path});
     }
 }

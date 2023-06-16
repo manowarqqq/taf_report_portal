@@ -1,9 +1,7 @@
 import BasePage from './basePage';
 import ElementHelper from '../helpers/elementHelpers';
-import {TitlesEnum} from '../enums/titlesEnum';
-import Waiters from '../helpers/waiters';
 import WindowHelper from '../helpers/windowHelper';
-import {Key} from 'webdriverio';
+import {BrowserHelper} from '../helpers/browserHelper';
 
 export default class FiltersPage extends BasePage {
     private title: string;
@@ -18,22 +16,22 @@ export default class FiltersPage extends BasePage {
         super();
         this.title = '#app div[class^="pageLayout__page-header"] span[title]';
         this.inputLaunchName = 'input[placeholder="Enter name"]';
-        this.addFilterButton = '//span[text()="Add filter"]';
+        this.addFilterButton = '//span[text()="Add Filter"]';
         this.widgetNames = '.itemInfo__name--27fwI>span';
     }
 
     public async waitForLoaded() {
-        await Waiters.waitForWindowLoadedByTitle(this.title, TitlesEnum.FiltersPage);
+        await BrowserHelper.page.waitForLoadState();
     }
 
-    public async getTitle(): Promise<string> {
+    public async getTitle() {
         return await ElementHelper.getText(this.title);
     }
 
     public async filterLaunchName(launchName: string) {
         await ElementHelper.click(this.addFilterButton);
         await ElementHelper.setValue(this.inputLaunchName, launchName);
-        await WindowHelper.sendKeys(Key.Enter);
+        await WindowHelper.sendKeys('Enter');
     }
 
     public async getAllWidget(): Promise<string[]> {

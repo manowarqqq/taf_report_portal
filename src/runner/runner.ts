@@ -7,9 +7,12 @@ import {logger} from '../utils/logger/logger';
 // import * as Jasmine from 'jasmine';
 
 (async () => {
+    const [, , ...files] = process.argv;
+
     if (TestConfig.getRunner() === 'mocha') {
         const runner = new Mocha(mochaConfig);
-        runner.addFile(path.join(__dirname, '../../test/api/reportPortalApiTests.js'));
+        files.forEach((file) => runner.addFile(path.join(file)));
+        // runner.addFile(path.join(__dirname, '../../test/reportPortalTests.js'));
         runner.run();
     } else if (TestConfig.getRunner() === 'jasmine') {
         const testRunner = new Jasmine({projectBaseDir: __dirname});

@@ -1,24 +1,31 @@
-import {remote} from 'webdriverio';
-import {TestConfig} from '../data/testConfig';
-import chromedriver from 'chromedriver';
+import playwright, {Browser, BrowserContext, Page} from 'playwright';
 
 export class BrowserHelper {
-    static browser: WebdriverIO.Browser;
+    static browser: Browser;
 
-    public static async init(): Promise<WebdriverIO.Browser> {
+    static page: Page;
+
+    public static async init(): Promise<Browser> {
         if (!BrowserHelper.browser) {
-            chromedriver.start(['--port=4444', '--silent']);
-
-            BrowserHelper.browser = await remote({
-                automationProtocol: 'webdriver',
-                capabilities: {browserName: TestConfig.getBrowserType()},
+            BrowserHelper.browser = await playwright.chromium.launch({
+                headless: false,
+                args: ['--start-maximized '],
+                slowMo: 1000,
             });
         }
         return BrowserHelper.browser;
     }
 
+    public static async openPage() {
+        this.page = await (await BrowserHelper.browser.newContext({viewport: null})).newPage();
+    }
+
     public static async close() {
-        await BrowserHelper.browser.deleteSession();
-        await chromedriver.stop();
+        let contexts: BrowserContext[] = BrowserHelper.browser.contexts();
+        for (let context of contexts) {
+            await context.close();
+        }
+        await BrowserHelper.browser.close();
+        this.browser = null;
     }
 }
