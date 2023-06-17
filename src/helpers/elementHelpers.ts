@@ -80,4 +80,12 @@ export default class ElementHelper {
             {locator, width, height},
         );
     }
+
+    public static async dragAndDropElement(locator: string, target: {x: number; y: number}) {
+        let elementBox = await this.getElementSize(locator);
+        await BrowserHelper.page.mouse.move(elementBox.x + elementBox.width / 2, elementBox.y + elementBox.height / 2);
+        await BrowserHelper.page.mouse.down();
+        await BrowserHelper.page.mouse.move(target.x, target.y);
+        await BrowserHelper.page.mouse.up();
+    }
 }

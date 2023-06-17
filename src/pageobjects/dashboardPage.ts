@@ -20,7 +20,6 @@ export class DashboardPage extends BasePage {
         super();
         this.title = '#app div[class^="pageLayout__page-header"] span[title]';
         this.editDashboardButtonElement = "div > div[class*='buttons-block']:nth-child(2) > button:nth-child(1)";
-        this.widgetHeaderElements = '[class*=widgetHeader__info-block] > [class*=widgetHeader__widget-name]';
     }
 
     getDashboardByNameElement(name: string) {
@@ -29,6 +28,10 @@ export class DashboardPage extends BasePage {
 
     getWidgetByName(name: string) {
         return `//div[contains(@class, "widgetsGrid") and contains(., "${name}")]`;
+    }
+
+    getWidgetHeaderByName(name: string) {
+        return `//div[contains(@class, "widget__widget-header") and contains(., "${name}")]`;
     }
 
     async selectDashboard(name: string) {
@@ -52,14 +55,9 @@ export class DashboardPage extends BasePage {
         } else throw new Error('Coulnt get element size');
     }
 
-    async getWidgetsLocations() {
-        let widgetNames = await this.getWidgetsNames();
-        let widgetLocations = [];
-        for (let widgetName of widgetNames) {
-            widgetLocations.push(await this.getWidgetSize(widgetName));
-        }
-
-        return widgetLocations;
+    async moveWidgetByName(widgetName: string, coordinates: {x: number; y: number}) {
+        const locator = this.getWidgetHeaderByName(widgetName);
+        await ElementHelper.dragAndDropElement(locator, coordinates);
     }
 }
 export const dashboardPage = new DashboardPage();

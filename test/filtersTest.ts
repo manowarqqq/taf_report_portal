@@ -36,7 +36,7 @@ describe('Filters smoke tests suit', () => {
     });
 
     it('Should filters widget', async () => {
-        let demoApiTestWidget = 40;
+        let demoApiTestWidget = 50;
         let widgetName = 'Demo Api Tests';
         await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
         await homePage.waitForLoaded();
