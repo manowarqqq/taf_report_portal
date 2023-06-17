@@ -34,6 +34,10 @@ export class DashboardPage extends BasePage {
         return `//div[contains(@class, "widget__widget-header") and contains(., "${name}")]`;
     }
 
+    public async getTitle() {
+        return await ElementHelper.getText(this.title);
+    }
+
     async selectDashboard(name: string) {
         let dashboard = this.getDashboardByNameElement(name);
         await ElementHelper.click(dashboard);
@@ -51,7 +55,7 @@ export class DashboardPage extends BasePage {
     async resizeWidgetSize(name: string, x: number, y: number) {
         let size = await ElementHelper.getElementSize(this.getWidgetByName(name));
         if (size) {
-            await ElementHelper.resizeElement(this.getWidgetByName(name), size.width + x, size?.height + y);
+            await ElementHelper.resizeElement(this.getWidgetByName(name), x, y);
         } else throw new Error('Coulnt get element size');
     }
 

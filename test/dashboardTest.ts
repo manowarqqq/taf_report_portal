@@ -4,10 +4,15 @@ import {expect} from 'chai';
 import {TestConfig} from '../src/data/testConfig';
 import {BrowserHelper} from '../src/helpers/browserHelper';
 import ElementHelper from '../src/helpers/elementHelpers';
+import {DashboardPage} from '../src/pageobjects/dashboardPage';
+import WindowHelper from '../src/helpers/windowHelper';
+import {TitlesEnum} from '../src/enums/titlesEnum';
+import {before, after, describe, it} from 'mocha';
 
 describe('Dashboard  move and resize', () => {
     let widgetName = 'LAUNCH STATISTICS AREA';
     let dashboardName = 'DEMO DASHBOARD';
+    let dashboard: DashboardPage;
 
     before(async () => {
         await BrowserHelper.init();
@@ -15,37 +20,69 @@ describe('Dashboard  move and resize', () => {
     after(async () => {
         await BrowserHelper.close();
     });
-    beforeEach(async () => {
-        await BrowserHelper.openPage();
+
+    describe('Dashboard  move and resize', () => {
+        let widgetSizeBefore: {x: number; y: number; width: number; height: number};
+        before(async () => {
+            await BrowserHelper.openPage();
+        });
+        after(async () => {
+            await dashboard.resizeWidgetSize(widgetName, widgetSizeBefore.width, widgetSizeBefore.height);
+            await WindowHelper.closeWindow();
+        });
+
+        it('Open dashboard page', async () => {
+            await homePage.open();
+            await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
+            await homePage.waitForLoaded();
+            dashboard = await homePage.openDashboard();
+
+            expect(await dashboard.getTitle()).to.equal(TitlesEnum.DashboardPage, 'DashboardPage is not loaded');
+        });
+
+        it('Reduce width and height for widget', async () => {
+            await dashboard.selectDashboard(dashboardName);
+            widgetSizeBefore = await dashboard.getWidgetSize(widgetName);
+            let targetSize = {
+                width: widgetSizeBefore.width - 100,
+                height: widgetSizeBefore.height - 100,
+            };
+            await dashboard.resizeWidgetSize(widgetName, targetSize.width, targetSize.height);
+
+            expect((await dashboard.getWidgetSize(widgetName)).width).to.equal(widgetSizeBefore.width - 100, 'Wrong widget width');
+            expect((await dashboard.getWidgetSize(widgetName)).height).to.equal(widgetSizeBefore.height - 100, 'Wrong widget height');
+        });
     });
+    describe('Dashboard  resize', () => {
+        let widgetHeaderSizeBeforeTest: {x: number; y: number; width: number; height: number};
+        before(async () => {
+            await BrowserHelper.openPage();
+        });
+        after(async () => {
+            await dashboard.moveWidgetByName(widgetName, {x: widgetHeaderSizeBeforeTest.x, y: widgetHeaderSizeBeforeTest.y});
+            await WindowHelper.closeWindow();
+        });
 
-    it('Reduce width and height for widget', async () => {
-        await homePage.open();
-        await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
-        await homePage.waitForLoaded();
-        const dashboard = await homePage.openDashboard();
-        await dashboard.selectDashboard(dashboardName);
-        const widgetSizeBefore = await dashboard.getWidgetSize(widgetName);
-        await dashboard.resizeWidgetSize(widgetName, -100, -100);
+        it('Open dashboard page', async () => {
+            await homePage.open();
+            await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
+            await homePage.waitForLoaded();
+            dashboard = await homePage.openDashboard();
 
-        expect((await dashboard.getWidgetSize(widgetName)).width).to.equal(widgetSizeBefore.width - 100, 'Wrong widget width');
-        expect((await dashboard.getWidgetSize(widgetName)).height).to.equal(widgetSizeBefore.height - 100, 'Wrong widget width');
-    });
+            expect(await dashboard.getTitle()).to.equal(TitlesEnum.DashboardPage, 'DashboardPage is not loaded');
+        });
 
-    it('Reduce width and height for widget', async () => {
-        await homePage.open();
-        await loginPage.login(TestConfig.getUsername(), TestConfig.getPassword());
-        await homePage.waitForLoaded();
-        const dashboard = await homePage.openDashboard();
-        await dashboard.selectDashboard(dashboardName);
-        const widgetHeaderBefore = await ElementHelper.getElementSize(dashboard.getWidgetHeaderByName(widgetName));
-        const widgetHeaderCenter = {
-            x: widgetHeaderBefore.x + widgetHeaderBefore.width / 2,
-            y: widgetHeaderBefore.y + widgetHeaderBefore.height / 2,
-        };
-        await dashboard.moveWidgetByName(widgetName, {x: widgetHeaderCenter.x + 100, y: widgetHeaderCenter.y});
-        const widgetHeaderAfter = await ElementHelper.getElementSize(dashboard.getWidgetHeaderByName(widgetName));
+        it('Select dashboard and move it', async () => {
+            await dashboard.selectDashboard(dashboardName);
+            widgetHeaderSizeBeforeTest = await ElementHelper.getElementSize(dashboard.getWidgetHeaderByName(widgetName));
+            const widgetHeaderCenter = {
+                x: widgetHeaderSizeBeforeTest.x + widgetHeaderSizeBeforeTest.width / 2,
+                y: widgetHeaderSizeBeforeTest.y + widgetHeaderSizeBeforeTest.height / 2,
+            };
+            await dashboard.moveWidgetByName(widgetName, {x: widgetHeaderCenter.x + 100, y: widgetHeaderCenter.y});
+            const widgetHeaderAfter = await ElementHelper.getElementSize(dashboard.getWidgetHeaderByName(widgetName));
 
-        expect(widgetHeaderAfter.x).to.greaterThan(widgetHeaderBefore.x, 'Wrong widget width');
+            expect(widgetHeaderAfter.x).to.greaterThan(widgetHeaderSizeBeforeTest.x, 'Wrong widget x position');
+        });
     });
 });
