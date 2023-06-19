@@ -6,12 +6,6 @@ import {Timeouts} from '../helpers/timeouts';
 export class DashboardPage extends BasePage {
     private title: string;
 
-    private inputLaunchName: string;
-
-    private addFilterButton: string;
-
-    private widgetNames: string;
-
     private editDashboardButtonElement: string;
 
     private widgetHeaderElements: string;

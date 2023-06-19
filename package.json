@@ -6,10 +6,10 @@
     "eslint": "eslint  . --ext .ts",
     "clean": "rimraf ./build ./mochawesome-report",
     "build": "npm run clean && tsc && copyfiles testconfig.json ./build",
-    "apiTtest": "node  ./build/src/runner/runner.js",
-    "filters_test": "node  ./build/src/runner/runner.js ./build/test/filtersTest.js",
-    "dashboard_test": "node  ./build/src/runner/runner.js ./build/test/dashboardTest.js",
-    "all_ui_test": "node  ./build/src/runner/runner.js ./build/test/dashboardTest.js ./build/test/filtersTest.js",
+    "apiTtest": "node  ./build/src/runner/runner.js -f api",
+    "filters_test": "node  ./build/src/runner/runner.js -f filters",
+    "dashboard_test": "node  ./build/src/runner/runner.js -f dashboard",
+    "all_ui_test": "node  ./build/src/runner/runner.js -f all_ui",
     "cucumber": "cucumber-js ./build/test/features"
   },
   "dependencies": {
