@@ -1,0 +1,6 @@
+{
+  "parallel": false,
+  "reporter": "mochawesome",
+  "timeout":  "100000",
+  "require": ["ts-node/register"]
+}

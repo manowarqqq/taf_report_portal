@@ -1,0 +1,110 @@
+{
+    //Eslint should use as default formatter, prettier was integrated to Eslint
+    //Possible use with husky and lint-stager like pre-commit hook (automated check all staged files before commit)
+
+    "root": true,
+    "globals": {
+        "Promise": "readonly"
+    },
+    "env": {
+        "node": true,
+        "es2021": true
+    },
+    "extends": ["plugin:@typescript-eslint/recommended", "airbnb-typescript/base", "plugin:import/recommended", "plugin:import/typescript", "prettier"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 10,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint", "import", "prettier"],
+    "ignorePatterns": [
+        "**/node_modules",
+        "testFiles",
+        "**/*.js",
+        "**/*.map",
+        "**/bin",
+        "build/**/*.*",
+        "!patches/**/*.*",
+        "**/*.tgz",
+        "**/*.log",
+        ".idea",
+        "package-lock.json",
+        "resources",
+        "index.ts"
+    ],
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            },
+            {
+                "usePrettierrc": true
+            }
+        ],
+        "arrow-body-style": "off",
+        "prefer-const": "off",
+        "prefer-arrow-callback": "off",
+        "@typescript-eslint/object-curly-spacing": "off",
+        "@typescript-eslint/return-await": "off",
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/no-inferrable-types": ["error", {"ignoreParameters": true, "ignoreProperties": true}],
+        "@typescript-eslint/no-explicit-any": "warn",
+
+        "import/no-extraneous-dependencies": ["off"],
+        "@typescript-eslint/import/no-extraneous-dependencies": ["off"],
+
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["warn", {"args": "none"}],
+
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["off"],
+
+        "no-loop-func": "off",
+        "@typescript-eslint/no-loop-func": ["off"],
+
+        "no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-expressions": ["off"],
+
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-use-before-define": ["warn"],
+        "@typescript-eslint/quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "ignorePattern": "^import\\s.+\\sfrom\\s.+;$",
+                "code": 180,
+                "ignoreTrailingComments": true,
+                "ignoreComments": true,
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
+        ],
+        "no-plusplus": "off",
+        "no-param-reassign": "off",
+        "no-debugger": "error",
+        "no-duplicate-imports": "error",
+        "spaced-comment": [
+            "off",
+            "always",
+            {
+                "markers": ["/"]
+            }
+        ],
+        "@typescript-eslint/typedef": [
+            "error",
+            {
+                "parameter": true,
+                "memberVariableDeclaration": true
+            }
+        ]
+    }
+}

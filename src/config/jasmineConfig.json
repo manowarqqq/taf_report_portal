@@ -1,0 +1,10 @@
+
+{
+  "specs": [
+    "../..//test/*.js"
+  ],
+  "spec_files": [],
+  "stopSpecOnExpectationFailure": false,
+  "random": false,
+  "runner": "local"
+}
