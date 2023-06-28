@@ -1,4 +1,4 @@
-name: Build
+name: Pipeline
 on:
   push:
     branches:
@@ -6,6 +6,12 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+  env_init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
   build:
     runs-on: ubuntu-latest
     steps:

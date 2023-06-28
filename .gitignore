@@ -4,5 +4,6 @@ build
 .idea
 **/.vscode
 /mochawesome-report
+.env
 
 
