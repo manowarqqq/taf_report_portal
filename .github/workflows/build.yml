@@ -13,7 +13,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
       - name: 'Check env file'
-        run: console.log(.env)
+        run: cat .env
   build:
     runs-on: ubuntu-latest
     steps:
