@@ -6,8 +6,8 @@ COPY package*.json ./
 
 ENV NODE_ENV=development
 #RUN NODE_ENV=development npm i
-RUN npm install && npm install --only=dev
-#ENV NODE_ENV=production
+RUN npm install
+RUN npm install --only=dev
 RUN npm run build
 
 COPY . .
