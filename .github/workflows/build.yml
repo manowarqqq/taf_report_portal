@@ -26,9 +26,9 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification'}"
-            needs: ${{ toJson(needs) }}
-            job: ${{ toJson(job) }}
-            steps: ${{ toJson(steps) }}
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          steps: ${{ toJson(steps) }}
 
   sonarcloud:
     needs: [build]
@@ -74,9 +74,9 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification'}"
-            needs: ${{ toJson(needs) }}
-            job: ${{ toJson(job) }}
-            steps: ${{ toJson(steps) }}
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          steps: ${{ toJson(steps) }}
 #  teams_integration_failure:
 #    needs: [ env_init, build, sonarcloud ]
 #    name: Result in teams
