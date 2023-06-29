@@ -16,16 +16,15 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    id: build
     steps:
       - uses: actions/checkout@v3
       - run: npm i
       - run: npm run build
-      - run: echo job.build.status
+      - run: echo ${job.build.status}
       - name: Microsoft Teams Notification
 #        uses: skitionek/notify-microsoft-teams@master
         if: failure()
-        run: echo ${job.build.status}
+        run: echo ${job.status}
 #        with:
 #          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
 #          overwrite: "{title: 'Github Bot notification'}"
