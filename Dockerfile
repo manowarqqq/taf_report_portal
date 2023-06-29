@@ -5,8 +5,8 @@ FROM node:18
 COPY package*.json ./
 
 ENV NODE_ENV=development
-#RUN NODE_ENV=development npm ci
-RUN npm install  && npm cache clean --force && npm install -g typescript rimraf
+#RUN NODE_ENV=development npm i
+RUN npm install && npm install --only=dev
 #ENV NODE_ENV=production
 RUN npm run build
 
