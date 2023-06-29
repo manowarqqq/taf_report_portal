@@ -35,22 +35,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  teams_integration_sucess:
-    needs: [env_init, build, sonarcloud]
-    name: Result in teams
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Microsoft Teams Notification
-        uses: skitionek/notify-microsoft-teams@master
-        if: success()
-        with:
-          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
-          overwrite: "{title: 'Github Bot notification'}"
-          needs: ${{ toJson(needs) }}
-          job: ${{ toJson(job) }}
-          steps: ${{ toJson(steps) }}
-
   teams_integration_failure:
     needs: [ env_init, build, sonarcloud ]
     name: Result in teams
@@ -60,6 +44,22 @@ jobs:
       - name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
         if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped')) }}
+        with:
+          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
+          overwrite: "{title: 'Github Bot notification'}"
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          steps: ${{ toJson(steps) }}
+
+  teams_integration:
+    needs: [env_init, build, sonarcloud]
+    name: Result in teams
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Microsoft Teams Notification
+        uses: skitionek/notify-microsoft-teams@master
+        if: success()
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification'}"
