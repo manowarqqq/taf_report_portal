@@ -54,10 +54,7 @@ jobs:
       - uses: actions/checkout@master
       - name: exit failed
         run: exit 2
-      - name: Failed
-#        id: failed
-#        if:
-        uses: skitionek/notify-microsoft-teams@master
+      - uses: skitionek/notify-microsoft-teams@master
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification'}"
