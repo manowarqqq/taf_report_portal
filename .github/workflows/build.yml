@@ -35,6 +35,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   teams_integration:
+    needs: [env_init, build, sonarcloud]
     name: Result in teams
     runs-on: ubuntu-latest
     steps:
