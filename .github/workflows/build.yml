@@ -48,3 +48,6 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
+          run: |
+            echo needs  ${{ toJson(needs) }} job  ${{ toJson(job) }} steps  ${{ toJson(steps) }}
+
