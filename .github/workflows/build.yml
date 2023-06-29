@@ -24,7 +24,7 @@ jobs:
       - name: Microsoft Teams Notification
 #        uses: skitionek/notify-microsoft-teams@master
         if: failure()
-        run: echo ${job.status}
+        run: echo ${{ job.status }}
 #        with:
 #          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
 #          overwrite: "{title: 'Github Bot notification'}"
