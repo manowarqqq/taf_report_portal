@@ -41,6 +41,8 @@ jobs:
       - uses: actions/checkout@master
       - name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
+        run: |
+          echo needs  ${{ toJson(needs) }} job  ${{ toJson(job) }} steps  ${{ toJson(steps) }}
         if: always()
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
@@ -48,6 +50,5 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
-          run: |
-            echo needs  ${{ toJson(needs) }} job  ${{ toJson(job) }} steps  ${{ toJson(steps) }}
+
 
