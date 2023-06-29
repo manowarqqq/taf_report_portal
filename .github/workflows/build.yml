@@ -38,10 +38,11 @@ jobs:
   teams_integration:
     needs: [ env_init, build, sonarcloud ]
     runs-on: ubuntu-latest
-#    if: always()
-    if: failure()
+    if: always()
     steps:
       - uses: actions/checkout@master
+      - name: exit failed
+        run: exit 1
       - name: Failed
         id: failed
         if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
@@ -52,8 +53,6 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
-      - name: exit failed
-        run: exit 1
 #  teams_integration_failure:
 #    needs: [ env_init, build, sonarcloud ]
 #    name: Result in teams
