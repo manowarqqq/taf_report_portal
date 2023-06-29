@@ -19,7 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm i
-      - run: exit 1
       - run: npm run build
       - name: Microsoft Teams Notification
 #        uses: skitionek/notify-microsoft-teams@master
@@ -53,6 +52,8 @@ jobs:
 #      || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
     steps:
       - run: exit 1
+      - name: notification failure
+#        if: failure()
       - uses: skitionek/notify-microsoft-teams@master
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
