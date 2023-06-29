@@ -22,6 +22,7 @@ jobs:
       - run: npm run build
 
   sonarcloud:
+    needs: [build]
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
@@ -51,6 +52,6 @@ jobs:
           steps: ${{ toJson(steps) }}
       - name: debug
         run: |
-            echo needs  ${{ toJson(needs) }}
+            echo job  ${{ toJson(job) }}
 
 
