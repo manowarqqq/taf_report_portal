@@ -20,6 +20,11 @@ jobs:
       - uses: actions/checkout@v3
       - run: npm i
       - run: npm run build
+      - name: Microsoft Teams Notification
+        uses: skitionek/notify-microsoft-teams@master
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
 
   sonarcloud:
     needs: [build]
@@ -59,7 +64,6 @@ jobs:
     name: Only if failure
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
         if: failure()
