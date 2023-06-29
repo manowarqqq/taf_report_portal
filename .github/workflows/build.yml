@@ -67,7 +67,7 @@ jobs:
     needs: [dotenv_init, build, sonarcloud]
     if: ${{ always() && needs.*.result == 'success'}}
     steps:
-        uses: skitionek/notify-microsoft-teams@master
+      - uses: skitionek/notify-microsoft-teams@master
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification SUCCESS'}"
