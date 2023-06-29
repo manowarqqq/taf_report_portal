@@ -36,13 +36,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   teams_integration:
-    needs: [ env_init, build, sonarcloud ]
+    needs: [build]
     runs-on: ubuntu-latest
     if: always()
     steps:
       - uses: actions/checkout@master
-      - name: exit failed
-        run: exit 1
+#      - name: exit failed
+#        run: exit 1
       - name: Failed
         id: failed
         if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
