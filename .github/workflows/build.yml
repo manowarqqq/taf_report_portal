@@ -48,11 +48,11 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification'}"
-#          needs: ${{ toJson(needs) }}
-#          job: ${{ toJson(job) }}
-#          steps: ${{ toJson(steps) }}
-#      - name: exit failed
-#        run: exit 1
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          steps: ${{ toJson(steps) }}
+      - name: exit failed
+        run: exit 1
 #  teams_integration_failure:
 #    needs: [ env_init, build, sonarcloud ]
 #    name: Result in teams
