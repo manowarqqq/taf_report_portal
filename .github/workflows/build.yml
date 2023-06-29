@@ -50,6 +50,7 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
+        run: exit 1
 #  teams_integration_failure:
 #    needs: [ env_init, build, sonarcloud ]
 #    name: Result in teams
