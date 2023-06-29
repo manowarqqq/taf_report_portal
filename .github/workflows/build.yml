@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
-        if: ${{ always() && contains(needs.*.result, 'failure') }}
+        if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped')) }}
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
           overwrite: "{title: 'Github Bot notification'}"
