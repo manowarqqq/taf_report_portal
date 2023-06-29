@@ -50,7 +50,7 @@ jobs:
     needs: [build]
     if: always()
     steps:
-      - run: echo ${{needs[0].result}}
+      - run: echo ${{needs.build.result}}
       - run: exit 1
       - name: notification failure
         uses: skitionek/notify-microsoft-teams@master
