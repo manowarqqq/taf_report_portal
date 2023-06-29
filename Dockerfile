@@ -5,6 +5,7 @@ FROM node:18
 COPY package*.json ./
 
 RUN NODE_ENV=development npm i
+RUN npm i tsc
 RUN npm run build
 
 COPY . .
