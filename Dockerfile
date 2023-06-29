@@ -4,7 +4,7 @@ FROM node:18
 
 COPY package*.json ./
 
-RUN npm install
+RUN NODE_ENV=development npm i
 RUN npm run build
 
 COPY . .
