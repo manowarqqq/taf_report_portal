@@ -24,7 +24,7 @@ jobs:
       - name: Microsoft Teams Notification
 #        uses: skitionek/notify-microsoft-teams@master
         if: failure()
-        run: echo ${{ job.status }}
+        run: echo  status ${{ job.status }}
 #        with:
 #          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
 #          overwrite: "{title: 'Github Bot notification'}"
@@ -49,7 +49,8 @@ jobs:
   teams_integration:
     needs: [build]
     runs-on: ubuntu-latest
-    if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+    if: contains(needs.*.result, 'failure')
+#      || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
     steps:
       - uses: actions/checkout@master
       - name: exit failed
