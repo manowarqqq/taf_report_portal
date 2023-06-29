@@ -8,6 +8,7 @@ ENV NODE_ENV=development
 #RUN NODE_ENV=development npm i
 #RUN npm install
 RUN NODE_ENV=development npm  install --production=false
+RUN npm ls
 RUN npm run build
 
 COPY . .
