@@ -4,7 +4,7 @@ FROM node:18
 
 COPY package*.json ./
 
-RUN NODE_ENV=development npm i
+RUN NODE_ENV=development npm ci
 RUN npm i typescript
 RUN npm run build
 
