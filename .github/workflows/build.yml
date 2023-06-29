@@ -50,6 +50,6 @@ jobs:
           steps: ${{ toJson(steps) }}
       - name: debug
         run: |
-            echo needs  ${{ toJson(needs) }} job  ${{ toJson(job) }} steps  ${{ toJson(steps) }}
+            echo needs  ${{ toJson(needs) }}
 
 
