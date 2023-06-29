@@ -55,6 +55,7 @@ jobs:
           steps: ${{ toJson(steps) }}
 
   if_failure:
+    needs: [ build ]
     name: Only if failure
     runs-on: ubuntu-latest
     steps:
