@@ -92,7 +92,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ docker ]
     steps:
-      - run: cd ../..
+      - run: cd ..
+      - run: pwd
+      - run: ls -lah
+      - run: cd ..
+      - run: pwd
+      - run: ls -lah
+      - run: cd ..
       - run: pwd
       - run: ls -lah
       - name: Publish Test Results
