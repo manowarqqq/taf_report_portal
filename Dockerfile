@@ -1,7 +1,7 @@
 FROM node:18
 COPY . /app
-#COPY . .
 WORKDIR /app
+#COPY . .
 ENV NODE_ENV=development
 RUN NODE_ENV=development npm install --include=dev
 RUN npm run build
