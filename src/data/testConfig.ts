@@ -18,7 +18,7 @@ export class TestConfig {
     }
 
     public static getPassword(): string {
-        return process.env.DEMO_PORTAL_USERNAME;
+        return process.env.DEMO_PORTAL_PASSWORD;
     }
 
     public static getBaseUrl(): string {

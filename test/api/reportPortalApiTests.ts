@@ -10,6 +10,7 @@ import {
     filtersListValidResponseSchema,
 } from '../../testData/schemas';
 import {Utils} from '../../src/utils/utils';
+import {HttpMethods} from '../../src/service/api/htppMethods';
 use(ChaiJsonSchema);
 
 describe('Filter Service- List of Filters: General case ', () => {
