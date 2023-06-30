@@ -20,7 +20,7 @@ describe('Filter Service- List of Filters: General case ', () => {
     it('Correct request', async () => {
         setTimeout(() => {
             console.log('Timeout...');
-        }, 10000);
+        }, 1000000);
         let res = await FiltersService.getPermittedFilters();
 
         expect(res.status).to.equal(statusCode, `Status code is not ${statusCode}`);
