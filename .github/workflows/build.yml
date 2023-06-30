@@ -85,7 +85,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
       - name: Run tests
-        run: docker run -itd -v app/:/app ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
+        run: docker run -itd -v app/:/app/mochawesome-report ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
   #        run: docker run  ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
 #      - name: Test results
 #        run: docker cp ${{ secrets.DOCKERHUB_USERNAME }}/taf:/mochawesome-report ./mochawesome-report
