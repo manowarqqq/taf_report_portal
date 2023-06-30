@@ -85,7 +85,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
       - name: Run tests
-        run: docker run -it ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
+        run: docker run  ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
 
 
 
