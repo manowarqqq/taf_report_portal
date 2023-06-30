@@ -90,8 +90,8 @@ jobs:
       - name: Debug tests
         run: docker logs taf
 #        run: docker cp ${{ secrets.DOCKERHUB_USERNAME }}/taf:/mochawesome-report ./mochawesome-report
-      - run: pwd && ls -lah
-      - run: ls -lah pwd test_result
+#      - run: pwd && ls -lah
+#      - run: ls -lah pwd test_result
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
