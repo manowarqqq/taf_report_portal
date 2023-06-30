@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="6.158" tests="8" failures="0">
+  <testsuite name="Root Suite" timestamp="2023-06-30T15:33:39" tests="0" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Filter Service- List of Filters: General case " timestamp="2023-06-30T15:33:39" tests="1" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="1.972" failures="0">
+    <testcase name="Filter Service- List of Filters: General case  Correct request" time="1.971" classname="Correct request">
+    </testcase>
+  </testsuite>
+  <testsuite name="Filter Service- List of Filters: Error 401 " timestamp="2023-06-30T15:33:41" tests="1" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="0.407" failures="0">
+    <testcase name="Filter Service- List of Filters: Error 401  Get list of filters with bad token" time="0.406" classname="Get list of filters with bad token">
+    </testcase>
+  </testsuite>
+  <testsuite name="Filter Service- Add Filter: General case" timestamp="2023-06-30T15:33:42" tests="1" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="0.910" failures="0">
+    <testcase name="Filter Service- Add Filter: General case Create Filter with valid data" time="0.503" classname="Create Filter with valid data">
+    </testcase>
+  </testsuite>
+  <testsuite name="Filter Service- Add Filter: Duplicate name" timestamp="2023-06-30T15:33:43" tests="2" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="1.226" failures="0">
+    <testcase name="Filter Service- Add Filter: Duplicate name Create Filter with valid data" time="0.421" classname="Create Filter with valid data">
+    </testcase>
+    <testcase name="Filter Service- Add Filter: Duplicate name Create Filter with the same name" time="0.397" classname="Create Filter with the same name">
+    </testcase>
+  </testsuite>
+  <testsuite name="Filter Service- Add Filter: Empty name" timestamp="2023-06-30T15:33:44" tests="1" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="0.400" failures="0">
+    <testcase name="Filter Service- Add Filter: Empty name Create Filter with Empty name" time="0.399" classname="Create Filter with Empty name">
+    </testcase>
+  </testsuite>
+  <testsuite name="Filter Service- Delete Filter: General case" timestamp="2023-06-30T15:33:44" tests="1" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="0.852" failures="0">
+    <testcase name="Filter Service- Delete Filter: General case Delete Filter with valid id" time="0.394" classname="Delete Filter with valid id">
+    </testcase>
+  </testsuite>
+  <testsuite name="Filter Service- Delete Filter: Invalid id" timestamp="2023-06-30T15:33:45" tests="1" file="D:\learn\advanced_course\rep\taf_report_portal\build\test\api\reportPortalApiTests.js" time="0.388" failures="0">
+    <testcase name="Filter Service- Delete Filter: Invalid id Delete Filter with in`valid id" time="0.388" classname="Delete Filter with in`valid id">
+    </testcase>
+  </testsuite>
+</testsuites>
