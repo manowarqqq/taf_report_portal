@@ -86,7 +86,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
       - name: Run tests
-        run: docker run --name taf -v $(pwd)/test_result:/app/mochawesome-report ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
+        run: docker run --name taf -v $(pwd)/test_result:/app/ ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
       - name: Debug tests
         run: docker logs taf
 #        run: docker cp ${{ secrets.DOCKERHUB_USERNAME }}/taf:/mochawesome-report ./mochawesome-report
@@ -95,8 +95,7 @@ jobs:
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-           files: |
-             test_result/mochawesome.json
+           files: test_result/test-results.xml
 
 #  test_results:
 #    runs-on: ubuntu-latest
