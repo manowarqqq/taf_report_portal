@@ -92,8 +92,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ docker ]
     steps:
-      - run: pwd
+      - run: cd ..
       - run: ls -lah
+      - run: ls -lah pwd/..
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
