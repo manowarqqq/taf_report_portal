@@ -11,6 +11,7 @@ import {
 } from '../../testData/schemas';
 import {Utils} from '../../src/utils/utils';
 import {HttpMethods} from '../../src/service/api/htppMethods';
+import Waiters from '../../src/helpers/waiters';
 use(ChaiJsonSchema);
 
 describe('Filter Service- List of Filters: General case ', () => {
@@ -18,7 +19,7 @@ describe('Filter Service- List of Filters: General case ', () => {
 
     it('Correct request', async () => {
         let res = await FiltersService.getPermittedFilters();
-
+        await Waiters.delay(60000);
         expect(res.status).to.equal(statusCode, `Status code is not ${statusCode}`);
         expect(res.data).to.be.jsonSchema(filtersListValidResponseSchema, 'json response in not valid');
     });
