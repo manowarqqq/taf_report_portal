@@ -1,18 +1,18 @@
 FROM node:18
 
-#WORKDIR /usr/src/app
+COPY . /app
 
-COPY package*.json ./
+WORKDIR /app
 
 ENV NODE_ENV=development
 #RUN NODE_ENV=development npm i
 #RUN npm install
 RUN NODE_ENV=development npm install --include=dev
-RUN npm ls
-RUN npm run clean
-RUN tsc
+#RUN npm ls
+#RUN npm run clean
+#RUN tsc
 # && copyfiles testconfig.json ./build
-#RUN npm run build
+RUN npm run build
 
 COPY . .
 
