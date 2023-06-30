@@ -18,8 +18,11 @@ describe('Filter Service- List of Filters: General case ', () => {
     const statusCode = 200;
 
     it('Correct request', async () => {
+        setTimeout(() => {
+            console.log('Timeout...');
+        }, 10000);
         let res = await FiltersService.getPermittedFilters();
-        await Waiters.delay(60000);
+
         expect(res.status).to.equal(statusCode, `Status code is not ${statusCode}`);
         expect(res.data).to.be.jsonSchema(filtersListValidResponseSchema, 'json response in not valid');
     });
