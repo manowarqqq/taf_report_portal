@@ -96,7 +96,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
            files: |
-             $(pwd)/test_result/mochawesome.json
+             /test_result/mochawesome.json
 
 #  test_results:
 #    runs-on: ubuntu-latest
