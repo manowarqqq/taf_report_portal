@@ -1,7 +1,5 @@
 {
   "baseUrl":"https://demo.reportportal.io",
-  "username": "default",
-  "password":"1q2w3e",
   "browser": "chrome",
   "driver": "playwright",
   "runner": "mocha",

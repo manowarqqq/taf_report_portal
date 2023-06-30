@@ -10,12 +10,17 @@ import {
     filtersListValidResponseSchema,
 } from '../../testData/schemas';
 import {Utils} from '../../src/utils/utils';
+import {HttpMethods} from '../../src/service/api/htppMethods';
+import Waiters from '../../src/helpers/waiters';
 use(ChaiJsonSchema);
 
 describe('Filter Service- List of Filters: General case ', () => {
     const statusCode = 200;
 
     it('Correct request', async () => {
+        setTimeout(() => {
+            console.log('Timeout...');
+        }, 1000000);
         let res = await FiltersService.getPermittedFilters();
 
         expect(res.status).to.equal(statusCode, `Status code is not ${statusCode}`);

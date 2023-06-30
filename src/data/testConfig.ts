@@ -1,5 +1,7 @@
 import testconfigJson from '../../testconfig.json';
 
+import 'dotenv/config';
+
 export class TestConfig {
     private static testConfig: typeof testconfigJson = testconfigJson;
 
@@ -12,11 +14,11 @@ export class TestConfig {
     }
 
     public static getUsername() {
-        return TestConfig.testConfig.username;
+        return process.env.DEMO_PORTAL_USERNAME;
     }
 
     public static getPassword(): string {
-        return TestConfig.testConfig.password;
+        return process.env.DEMO_PORTAL_PASSWORD;
     }
 
     public static getBaseUrl(): string {
