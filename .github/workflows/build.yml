@@ -90,11 +90,11 @@ jobs:
         run: docker run --name taf  -v $(pwd)/result:/app/test_result ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
       - name: Debug tests
         run: docker logs taf
-#      - run: ls -lah pwd test_result
-#      - name: Publish Test Results
-#        uses: EnricoMi/publish-unit-test-result-action@v2
-#        with:
-#           files: test_result/test-results.xml
+      - run: ls -lah pwd test_result
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+           files: test_result/test-results.xml
 
 
 
