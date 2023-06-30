@@ -85,7 +85,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
       - name: Run tests
-          run: pwd && ls -lah
+        run: pwd && ls -lah
   #        run: docker run  ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
 #         run: docker run -itd -v app/:/app ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
 #      - name: Test results
