@@ -90,15 +90,15 @@ jobs:
       - pwsh: |
           docker create --name testcontainer $id
           docker cp ${{ secrets.DOCKERHUB_USERNAME }}/taf:/mochawesome-report ./mochawesome-report
-
-  test_results:
-    runs-on: ubuntu-latest
-    needs: [ docker ]
-    steps:
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          files: |
-            mochawesome-report/mochawesome.json
+#
+#  test_results:
+#    runs-on: ubuntu-latest
+#    needs: [ docker ]
+#    steps:
+#      - name: Publish Test Results
+#        uses: EnricoMi/publish-unit-test-result-action@v2
+#        with:
+#          files: |
+#            mochawesome-report/mochawesome.json
 
 
