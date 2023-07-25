@@ -1,6 +1,7 @@
 {
   "baseUrl":"https://demo.reportportal.io",
   "browser": "chrome",
+  "isHeadless": true,
   "driver": "playwright",
   "runner": "mocha",
   "project": "default_personal",

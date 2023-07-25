@@ -40,4 +40,8 @@ export class TestConfig {
     static getDriver() {
         return TestConfig.testConfig.driver;
     }
+
+    static isHeadless() {
+        return TestConfig.testConfig.isHeadless;
+    }
 }
