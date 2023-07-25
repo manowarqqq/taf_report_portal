@@ -2,7 +2,8 @@
   "parallel": false,
   "reporter": "mocha-junit-reporter",
   "reporterOptions": {
-    "toConsole": true
+    "toConsole": true,
+    "mochaFile": "./result/test-results.xml"
   },
   "timeout":  "100000",
   "require": ["ts-node/register"]
