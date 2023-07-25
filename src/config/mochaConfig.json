@@ -2,8 +2,7 @@
   "parallel": false,
   "reporter": "mocha-junit-reporter",
   "reporterOptions": {
-    "toConsole": true,
-
+    "toConsole": true
   },
   "timeout":  "100000",
   "require": ["ts-node/register"]
