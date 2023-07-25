@@ -1,4 +1,4 @@
-FROM node:18
+FROM mcr.microsoft.com/playwright:v1.36.0-jammy
 COPY . /app
 WORKDIR /app
 
