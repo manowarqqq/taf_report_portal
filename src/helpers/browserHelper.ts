@@ -1,4 +1,5 @@
 import playwright, {Browser, BrowserContext, Page} from 'playwright';
+import {TestConfig} from '../data/testConfig';
 
 export class BrowserHelper {
     static browser: Browser;
@@ -8,7 +9,7 @@ export class BrowserHelper {
     public static async init(): Promise<Browser> {
         if (!BrowserHelper.browser) {
             BrowserHelper.browser = await playwright.chromium.launch({
-                headless: false,
+                headless: TestConfig.isHeadless(),
                 args: ['--start-maximized '],
                 slowMo: 1000,
             });

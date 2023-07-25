@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: pwd && ls -lah
       - run: npm i
       - run: npm run build
 
@@ -37,7 +38,7 @@ jobs:
 
   teams_integration_failure:
     runs-on: ubuntu-latest
-    needs: [dotenv_init, build, sonarcloud]
+    needs: [dotenv_init, build, sonarcloud, docker_tests]
     if: ${{ always() && contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')}}
     steps:
       - run: exit 1
@@ -54,7 +55,7 @@ jobs:
 
   teams_integration_success:
     runs-on: ubuntu-latest
-    needs: [dotenv_init, build, sonarcloud]
+    needs: [dotenv_init, build, sonarcloud, docker_tests]
     if: always() && ${{needs.*.result == 'success'}}
     steps:
       - uses: skitionek/notify-microsoft-teams@master
@@ -65,8 +66,9 @@ jobs:
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
 
-  docker:
+  docker_tests:
     runs-on: ubuntu-latest
+    needs: [sonarcloud]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -84,21 +86,18 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
+      - name: Clean env
+        run: rm -rf /app/result
       - name: Run tests
-        run: docker run -itd -v app/:/app/mochawesome-report ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
-  #        run: docker run  ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
-#      - name: Test results
-#        run: docker cp ${{ secrets.DOCKERHUB_USERNAME }}/taf:/mochawesome-report ./mochawesome-report
-
-  test_results:
-    runs-on: ubuntu-latest
-    needs: [ docker ]
-    steps:
-      - run: pwd && ls-lah
+        run: docker run --name taf  -v $(pwd)/result:/app/result ${{ secrets.DOCKERHUB_USERNAME }}/taf:latest
+      - name: Debug tests
+        run: docker logs taf
+#      - run: ls -lah pwd test_result
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: |
-            app/mochawesome-report/mochawesome.json
+           files: result/test-results.xml
+           action_fail: true
+
 
 
