@@ -60,7 +60,7 @@ describe('Filters smoke tests suit', () => {
     });
 
     describe('Should filters widget', async () => {
-        let demoApiTestWidget = 20;
+        let demoApiTestWidget = 50;
         let widgetName = 'Demo Api Tests';
         let filterPage: FiltersPage;
 
